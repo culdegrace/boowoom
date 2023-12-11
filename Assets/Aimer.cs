@@ -11,6 +11,8 @@ public class Aimer : MonoBehaviour
     public Transform hingeTransform;
     public Transform barrelTransform;
 
+    public LayerMask aimableObjects; // Only cast rays to environment (stage and mobs).
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class Aimer : MonoBehaviour
         bool found = false;
         var lookAtPosition = Vector3.zero;
         // Mouse intersects with stage.
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, aimableObjects))
         {
             if(hit.transform.name == "STAGE")
             {
