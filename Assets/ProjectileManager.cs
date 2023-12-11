@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
 public class ProjectileManager : MonoBehaviour
 {
     public GameObject PROJECTILE; // From the .blend
-    float magnitude = 2;
+    float magnitude = 3;
     // Start is called before the first frame update
     void Start()
     {

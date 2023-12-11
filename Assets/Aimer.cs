@@ -7,15 +7,13 @@ public class Aimer : MonoBehaviour
 {
     public ProjectileManager p;
 
-    Transform baseTransform;
-    Transform hingeTransform;
-    Transform barrelTransform;
+    public Transform baseTransform;
+    public Transform hingeTransform;
+    public Transform barrelTransform;
     // Start is called before the first frame update
     void Start()
     {
-        baseTransform = transform.Find("BASE");
-        hingeTransform = transform.Find("HINGE");
-        barrelTransform = transform.Find("BARREL");
+
     }
 
     // Update is called once per frame
@@ -73,7 +71,7 @@ public class Aimer : MonoBehaviour
             Quaternion rot = barrelLerp;
             Vector3 directionToFace = barrelLerp * Vector3.down;
             Debug.DrawRay(barrelTransform.position, directionToFace, Color.red, 2f);
-            p.CreateProjectile(barrelTransform.position + .2f * directionToFace, directionToFace, rot);
+            p.CreateProjectile(barrelTransform.position + .5f * directionToFace, directionToFace, rot);
         }
     }
 }
