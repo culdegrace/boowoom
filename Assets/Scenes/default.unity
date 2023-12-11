@@ -135,6 +135,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1630592207}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &341240960 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1247878112276443566, guid: 798236e18d2d8b6438ad36286651df6d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1630592207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &341240962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -160,7 +166,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &341240963
 BoxCollider:
@@ -169,7 +175,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341240959}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e6976723c08b86f468f048983526026e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -352,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PROJECTILE: {fileID: 1323833123}
+  parent: {fileID: 341240959}
 --- !u!1 &1323833123 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1535105834944504052, guid: 798236e18d2d8b6438ad36286651df6d,
@@ -548,6 +555,7 @@ GameObject:
   - component: {fileID: 1904583977}
   - component: {fileID: 1904583976}
   - component: {fileID: 1904583979}
+  - component: {fileID: 1904583980}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -623,7 +631,7 @@ Transform:
   m_GameObject: {fileID: 1904583975}
   serializedVersion: 2
   m_LocalRotation: {x: 0.085102506, y: -0, z: -0, w: 0.9963722}
-  m_LocalPosition: {x: 0, y: 2.69, z: -10.79}
+  m_LocalPosition: {x: 0, y: 2.29, z: -10.79}
   m_LocalScale: {x: 1, y: 1, z: 0.87626}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -673,6 +681,23 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1904583980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904583975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232699c62fd187c4fb960f0679050e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 341240960}
+  offset: {x: 0, y: 2.7, z: -10.79}
+  airoffset: {x: 0, y: 1, z: 0}
+  delay: 0.25
+  speed: 3
 --- !u!1 &1921913582
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +776,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876841971553531271}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e6976723c08b86f468f048983526026e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

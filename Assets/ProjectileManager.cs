@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,8 @@ public class Projectile : MonoBehaviour
     Mesh projectile;
     Vector3 initialPosition;
     Vector3 direction;
+    public float explosionForce = 750.0f;
+    public float explosionRadius = 0.5f;
 
     void Init(Vector3 initialPosition, Vector3 direction)
     {
@@ -21,6 +24,11 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log(collision.gameObject.name);
         // TODO: Explode!
+        foreach (Rigidbody rb in ProjectileManager.allRigidbodies)
+        {
+            rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+        }
+
         Destroy(this.gameObject);
 
     }
@@ -28,6 +36,9 @@ public class Projectile : MonoBehaviour
 
 public class ProjectileManager : MonoBehaviour
 {
+
+    public static List<Rigidbody> allRigidbodies = new List<Rigidbody>();
+
     public GameObject PROJECTILE; // From the .blend
     float magnitude = 3;
     float friction = 0.5f; // Dampen recoil.
@@ -48,6 +59,7 @@ public class ProjectileManager : MonoBehaviour
         // Default rotation values of parent. (prevents char from tipping).
         parentDefaultRotation = parent.transform.rotation;
         parentRB = parent.GetComponent<Rigidbody>();
+        ProjectileManager.RegisterRigidbody(parentRB);
     }
 
     // If any projectile gets created, it will have these transforms.
@@ -71,6 +83,22 @@ public class ProjectileManager : MonoBehaviour
         Rigidbody parentRB = parent.GetComponent<Rigidbody>();
         parentRB.AddForce(-magnitude * friction * this.projectileDirection, ForceMode.Impulse);
 
+    }
+
+    public static void RegisterRigidbody(Rigidbody rb)
+    {
+        if (!allRigidbodies.Contains(rb))
+        {
+            allRigidbodies.Add(rb);
+        }
+    }
+
+    public static void UnregisterRigidbody(Rigidbody rb)
+    {
+        if (allRigidbodies.Contains(rb))
+        {
+            allRigidbodies.Remove(rb);
+        }
     }
 
     void Update()
