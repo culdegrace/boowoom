@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,6 +19,9 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);
+        // TODO: Explode!
+        Destroy(this.gameObject);
+
     }
 }
 

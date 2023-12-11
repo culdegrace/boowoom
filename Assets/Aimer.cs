@@ -68,9 +68,5 @@ public class Aimer : MonoBehaviour
         // UPDATE TRAJECTORY OF WOULD-BE PROJECTILES
         p.UpdateTransforms(barrelTransform.position, barrelLerp);
 
-        if (Input.anyKey)
-        {
-            p.CreateProjectile();
-        }
     }
 }
