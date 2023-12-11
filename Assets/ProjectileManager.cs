@@ -14,14 +14,9 @@ public class Projectile : MonoBehaviour
         this.direction = direction;
     }
 
-    void Start()
+    void OnCollisionEnter(Collision collision)
     {
-
-    }
-
-    void Update()
-    {
-
+        Debug.Log(collision.gameObject.name);
     }
 }
 
