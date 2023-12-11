@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Aimer : MonoBehaviour
 {
+    public ProjectileManager p;
+
     Transform baseTransform;
     Transform hingeTransform;
     Transform barrelTransform;
@@ -68,8 +70,10 @@ public class Aimer : MonoBehaviour
         {
             Debug.Log("Drawing ray.");
             // Direction of barrel.
-            Vector3 directionToFace = lookAtPosition - barrelTransform.position;
+            Quaternion rot = barrelLerp;
+            Vector3 directionToFace = barrelLerp * Vector3.down;
             Debug.DrawRay(barrelTransform.position, directionToFace, Color.red, 2f);
+            p.CreateProjectile(barrelTransform.position + .2f * directionToFace, directionToFace, rot);
         }
     }
 }
