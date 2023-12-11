@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour
 {
@@ -24,19 +25,34 @@ public class ProjectileManager : MonoBehaviour
 {
     public GameObject PROJECTILE; // From the .blend
     float magnitude = 3;
+
+    private Quaternion projectileRotation = Quaternion.identity;
+    private Vector3 projectileDirection = Vector3.zero;
+    private Vector3 projectilePosition = Vector3.zero;
+    private float barrelLength = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    public void CreateProjectile(Vector3 location, Vector3 direction, Quaternion rotation)
+    // If any projectile gets created, it will have these transforms.
+    public void UpdateTransforms(Vector3 position, Quaternion rotation)
     {
-        GameObject projectileGO = (GameObject) Instantiate(PROJECTILE, location, rotation);
+        this.projectilePosition = position;
+        this.projectileRotation = rotation;
+        this.projectileDirection = rotation * Vector3.down;
+    }
+
+    public void CreateProjectile()
+    {
+        var offsetPos = this.projectilePosition + this.projectileDirection * this.barrelLength; // Offset by barrel length.
+        GameObject projectileGO = (GameObject) Instantiate(PROJECTILE, offsetPos, this.projectileRotation);
         projectileGO.SetActive(true); // The platonic PROJECTILE begins unchecked.
         Projectile projectile = projectileGO.AddComponent<Projectile>();
         Rigidbody projectileRb = projectileGO.GetComponent<Rigidbody>();
-        projectileRb.AddForce(magnitude * direction, ForceMode.Impulse);
+        projectileRb.AddForce(magnitude * this.projectileDirection, ForceMode.Impulse);
     }
 
     // Update is called once per frame

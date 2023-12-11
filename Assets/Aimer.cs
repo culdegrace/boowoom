@@ -10,6 +10,7 @@ public class Aimer : MonoBehaviour
     public Transform baseTransform;
     public Transform hingeTransform;
     public Transform barrelTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,7 @@ public class Aimer : MonoBehaviour
 
         if (!found)
         {
+            Debug.Log("...Does this ever occur?");
             return;
         }
 
@@ -63,15 +65,12 @@ public class Aimer : MonoBehaviour
         var barrelLerp = Quaternion.Lerp(barrelTransform.rotation, barrelRotation, 0.1f);
         barrelTransform.rotation = barrelLerp;
 
-    // POLL INPUT
+        // UPDATE TRAJECTORY OF WOULD-BE PROJECTILES
+        p.UpdateTransforms(barrelTransform.position, barrelLerp);
+
         if (Input.anyKey)
         {
-            Debug.Log("Drawing ray.");
-            // Direction of barrel.
-            Quaternion rot = barrelLerp;
-            Vector3 directionToFace = barrelLerp * Vector3.down;
-            Debug.DrawRay(barrelTransform.position, directionToFace, Color.red, 2f);
-            p.CreateProjectile(barrelTransform.position + .5f * directionToFace, directionToFace, rot);
+            p.CreateProjectile();
         }
     }
 }
