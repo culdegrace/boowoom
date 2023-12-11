@@ -11,6 +11,7 @@ public class Aimer : MonoBehaviour
     public Transform hingeTransform;
     public Transform barrelTransform;
 
+
     public LayerMask aimableObjects; // Only cast rays to environment (stage and mobs).
 
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class Aimer : MonoBehaviour
     {
 
     }
+
+
 
     // Update is called once per frame
     void Update()
